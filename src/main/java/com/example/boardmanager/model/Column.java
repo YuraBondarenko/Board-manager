@@ -1,6 +1,5 @@
 package com.example.boardmanager.model;
 
-import java.math.BigInteger;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,7 +14,7 @@ import lombok.Data;
 public class Column {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private BigInteger id;
+    private Long id;
     @ManyToOne
     private Board board;
     private String title;
