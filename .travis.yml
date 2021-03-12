@@ -8,3 +8,14 @@ cache:
     - $HOME/.m2
 before_install:
   - chmod +x mvnw
+
+sudo: enabled
+
+addons:
+  postgresql: "11"
+
+before_script:
+  - psql -c "create database aries;" -U board-manager
+  - sudo -u postgres psql -c "ALTER ROLE postgres WITH password '1234'"
+services:
+  - postgresql
