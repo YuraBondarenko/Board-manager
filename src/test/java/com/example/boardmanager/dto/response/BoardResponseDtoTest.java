@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class BoardResponseDtoTest {
-
     @Test
     public void dto_Ok() {
         BoardResponseDto boardResponseDto = new BoardResponseDto();
