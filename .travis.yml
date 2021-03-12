@@ -3,11 +3,14 @@ jdk:
   - openjdk11
 script:
   - mvn clean install
-  - echo "skipping tests"
 cache:
   directories:
     - $HOME/.m2
 before_install:
   - chmod +x mvnw
+services:
+      - postgresql
+before_script:
+      - psql -c 'create database travis_ci_test;' -U postgres
 
 
