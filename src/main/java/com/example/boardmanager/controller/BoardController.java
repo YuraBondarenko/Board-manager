@@ -16,7 +16,6 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.core.io.ByteArrayResource;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -58,9 +57,11 @@ public class BoardController {
             @RequestParam(required = false, defaultValue = "0") int page,
             @RequestParam(required = false, defaultValue = "10") int limit,
             @RequestParam(required = false, defaultValue = "id") String sortBy) {
-        return new ResponseEntity<>(boardService.getAll(page, limit, sortBy).stream()
+        List<BoardResponseDto> boards = boardService.getAll(page, limit, sortBy)
+                .stream()
                 .map(boardMapper::getDto)
-                .collect(Collectors.toList()), HttpStatus.OK);
+                .collect(Collectors.toList());
+        return new ResponseEntity<>(boards, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
@@ -90,14 +91,10 @@ public class BoardController {
     @GetMapping(path = "/image/download/{id}")
     public ResponseEntity<ByteArrayResource> download(@PathVariable Long id) throws IOException {
         File file = new File(boardService.getById(id).getFilePath());
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Cache-Control", "no-cache, no-store, must-revalidate");
-        headers.add("Pragma", "no-cache");
-        headers.add("Expires", "0");
         Path path = Paths.get(file.getAbsolutePath());
         ByteArrayResource resource = new ByteArrayResource(Files.readAllBytes(path));
+
         return ResponseEntity.ok()
-                .headers(headers)
                 .contentLength(file.length())
                 .contentType(MediaType.APPLICATION_OCTET_STREAM)
                 .body(resource);
