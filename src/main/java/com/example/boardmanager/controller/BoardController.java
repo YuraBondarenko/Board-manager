@@ -58,9 +58,11 @@ public class BoardController {
             @RequestParam(required = false, defaultValue = "0") int page,
             @RequestParam(required = false, defaultValue = "10") int limit,
             @RequestParam(required = false, defaultValue = "id") String sortBy) {
-        return new ResponseEntity<>(boardService.getAll(page, limit, sortBy).stream()
+        List<BoardResponseDto> boards = boardService.getAll(page, limit, sortBy)
+                .stream()
                 .map(boardMapper::getDto)
-                .collect(Collectors.toList()), HttpStatus.OK);
+                .collect(Collectors.toList());
+        return new ResponseEntity<>(boards, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")

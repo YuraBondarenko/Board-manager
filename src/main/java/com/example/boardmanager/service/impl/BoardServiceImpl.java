@@ -6,7 +6,6 @@ import com.example.boardmanager.service.BoardService;
 import com.example.boardmanager.service.ColumnService;
 import com.example.boardmanager.service.TaskService;
 import java.util.List;
-import java.util.Optional;
 import javax.persistence.EntityNotFoundException;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -29,7 +28,7 @@ public class BoardServiceImpl implements BoardService {
 
     @Override
     public Board getById(Long id) {
-        return Optional.of(boardRepository.getOne(id))
+        return boardRepository.getById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Cannot find board with id " + id));
     }
 
