@@ -1,6 +1,5 @@
 # Board-manager 
 
-## Application with a board, a column and a task
 
 ## Functionality(url = "localhost:8080"):
 ### Board("/boards"):
@@ -23,10 +22,11 @@
 * Delete - delete task by id("/'id'").
 
 # To run the project locally:
-1. Create schema in the PosgreSQL "board-manager"
+1. Create schema in the PosgreSQL "board-manager";
 2. Update file "src/main/resources/application.properties": 
-    spring.datasource.username=root  // type your role in PosgreSQL
-    spring.datasource.password=1234  // type your password
+    spring.datasource.username=root  // type your role in the PosgreSQL
+    spring.datasource.password=1234  // type your password;
+3. To log in use this data: "user" and password "1234".
    
 
 
