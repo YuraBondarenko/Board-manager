@@ -6,4 +6,8 @@ public interface ColumnService {
     Column save(Column column);
 
     Column delete(Long id);
+
+    void deleteByBoardId(Long id);
+
+    Column getById(Long id);
 }
