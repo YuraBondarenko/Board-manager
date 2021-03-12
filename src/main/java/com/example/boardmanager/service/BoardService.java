@@ -10,5 +10,5 @@ public interface BoardService {
 
     Board delete(Long id);
 
-    List<Board> getAll();
+    List<Board> getAll(int page, int limit, String sortBy);
 }
