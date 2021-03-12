@@ -3,19 +3,11 @@ jdk:
   - openjdk11
 script:
   - mvn clean install
+  - echo "skipping tests"
 cache:
   directories:
     - $HOME/.m2
 before_install:
   - chmod +x mvnw
 
-sudo: enabled
 
-addons:
-  postgresql: "13.2"
-
-before_script:
-  - psql -c "create database aries;" -U board-manager
-  - sudo -u postgres psql -c "ALTER ROLE root WITH password '1234'"
-services:
-  - postgresql
